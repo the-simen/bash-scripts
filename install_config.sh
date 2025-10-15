@@ -54,7 +54,7 @@ echo "⬇️ Cloning omarchy-config..."
 git clone https://github.com/the-simen/omarchy-config.git --depth 1
 
 echo "🧩 Copying omarchy config (without deleting others)..."
-rsync -av --ignore-existing omarchy-config/ ~/.config/
+rsync -av omarchy-config/ ~/.config/
 
 echo "🎨 Installing catppuccin tmux theme..."
 mkdir -p ~/.config/tmux/plugins/catppuccin
@@ -62,13 +62,13 @@ git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugin
 
 echo "🧠 Downloading tmux config..."
 git clone https://github.com/the-simen/tmux-config.git --depth 1
-rsync -av --ignore-existing --exclude='.git' tmux-config/ ~/
+rsync -av --exclude='.git' tmux-config/ ~/
 
 echo "📝 Installing NvChad..."
 rm -rf ~/.config/nvim ~/.local/share/nvim
-git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+git clone https://github.com/the-simen/nvchad-configs ~/.config/nvim --depth 1
 
 echo ""
-echo "✅ Done!"
-echo "📦 Your old configs were backed up to: $BACKUP_DIR"
-echo "🔁 Please reboot your system!"
+notify-send "✅ Done!"
+ "📦 Your old configs were backed up to: $BACKUP_DIR
+ 🔁 Please reboot your system!"
