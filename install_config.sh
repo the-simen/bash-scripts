@@ -58,7 +58,7 @@ rsync -av omarchy-config/ ~/.config/
 
 echo "🎨 Installing catppuccin tmux theme..."
 mkdir -p ~/.config/tmux/plugins/catppuccin
-git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux --depth 1
 
 echo "🧠 Downloading tmux config..."
 git clone https://github.com/the-simen/tmux-config.git --depth 1
@@ -68,6 +68,10 @@ rsync -av --exclude='.git' tmux-config/ ~/
 echo "📝 Installing NvChad..."
 rm -rf ~/.config/nvim ~/.local/share/nvim
 git clone https://github.com/the-simen/nvchad-configs ~/.config/nvim --depth 1
+
+echo "📸 Downloading wallpapers..."
+rm -rf ~/.config/omarchy/current/theme/backgrounds/*
+git clone https://github.com/orangci/walls-catppuccin-mocha.git ~/.config/omarchy/current/theme/backgrounds/ --depth 1
 
 echo ""
 notify-send "✅ Done!" "📦 Your old configs were backed up to: $BACKUP_DIR 🔁 Please reboot your system!"
