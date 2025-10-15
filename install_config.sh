@@ -62,6 +62,7 @@ git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugin
 
 echo "🧠 Downloading tmux config..."
 git clone https://github.com/the-simen/tmux-config.git --depth 1
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 rsync -av --exclude='.git' tmux-config/ ~/
 
 echo "📝 Installing NvChad..."
@@ -69,6 +70,4 @@ rm -rf ~/.config/nvim ~/.local/share/nvim
 git clone https://github.com/the-simen/nvchad-configs ~/.config/nvim --depth 1
 
 echo ""
-notify-send "✅ Done!"
- "📦 Your old configs were backed up to: $BACKUP_DIR
- 🔁 Please reboot your system!"
+notify-send "✅ Done!" "📦 Your old configs were backed up to: $BACKUP_DIR 🔁 Please reboot your system!"
