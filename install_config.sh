@@ -32,7 +32,7 @@ chsh -s "$(which fish)"
 
 echo "📦 Installing AUR packages via yay..."
 yay -S --needed --noconfirm \
-  hiddify google-chrome openvpn-update-systemd-resolved \
+  throne google-chrome openvpn-update-systemd-resolved \
   systemd-resolvconf openvpn-update-resolv-conf-git \
   openrgb-resolv-conf-git
 
