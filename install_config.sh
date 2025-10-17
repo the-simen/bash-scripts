@@ -40,8 +40,10 @@ echo "🔁 Updating hyprpm..."
 hyprpm update || true
 
 echo "✨ Installing Hyprspace..."
+hyprpm add https://github.com/hyprwm/hyprland-plugins
 hyprpm add https://github.com/KZDKM/Hyprspace || true
 hyprpm enable Hyprspace || true
+hyprpm enable hyprexpo || true
 
 echo "📁 Backing up existing ~/.config..."
 if [ -d "$HOME/.config" ]; then
