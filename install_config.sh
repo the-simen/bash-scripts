@@ -25,7 +25,7 @@ sudo pacman -S --needed --noconfirm \
   discord telegram-desktop fish tmux \
   kitty openvpn yazi fastfetch \
   openrgb rsync lazygit eza mc btop \
-  bat gping steam
+  bat gping steam ntfs-3g
 
 echo "🐚 Setting default shell to fish..."
 chsh -s "$(which fish)"
