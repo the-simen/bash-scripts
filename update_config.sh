@@ -1,9 +1,11 @@
 cd ~/.config
-git stash
+git stash push -q
 git pull
+git stash pop -q
 
 cd ~/.config/nvim 
-git stash
+git stash push -q
 git pull
+git stash pop -q
 
 cd
