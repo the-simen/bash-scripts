@@ -33,7 +33,7 @@ chsh -s "$(which fish)"
 
 echo "📦 Installing AUR packages via yay..."
 yay -S --needed --noconfirm \
-  v2rayn google-chrome openvpn-update-systemd-resolved \
+  v2rayn-bin google-chrome openvpn-update-systemd-resolved \
   systemd-resolvconf openvpn-update-resolv-conf-git \
   openrgb-resolv-conf-git
 
@@ -42,8 +42,6 @@ hyprpm update || true
 
 echo "✨ Installing Hyprspace..."
 hyprpm add https://github.com/hyprwm/hyprland-plugins
-hyprpm add https://github.com/KZDKM/Hyprspace || true
-hyprpm enable Hyprspace || true
 hyprpm enable hyprexpo || true
 
 echo "📁 Backing up existing ~/.config..."
