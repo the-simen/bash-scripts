@@ -26,7 +26,9 @@ sudo pacman -S --needed --noconfirm \
   kitty openvpn yazi fastfetch \
   openrgb rsync lazygit eza mc btop \
   bat gping steam ntfs-3g \
-  celluloid
+  clapper gst-libav gst-plugins-base \
+  gst-plugins-good gst-plugins-bad \
+  gst-plugins-ugly
 
 echo "🐚 Setting default shell to fish..."
 chsh -s "$(which fish)"
@@ -34,8 +36,7 @@ chsh -s "$(which fish)"
 echo "📦 Installing AUR packages via yay..."
 yay -S --needed --noconfirm \
   v2rayn-bin google-chrome openvpn-update-systemd-resolved \
-  systemd-resolvconf openvpn-update-resolv-conf-git \
-  openrgb-resolv-conf-git
+  systemd-resolvconf-git openvpn-update-resolv-conf-git \
 
 echo "🔁 Updating hyprpm..."
 hyprpm update || true
