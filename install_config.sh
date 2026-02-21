@@ -35,7 +35,7 @@ chsh -s "$(which fish)"
 
 echo "📦 Installing AUR packages via yay..."
 yay -S --needed --noconfirm \
-  v2rayn-bin google-chrome openvpn-update-systemd-resolved \
+  happ-desktop-bin google-chrome openvpn-update-systemd-resolved \
   systemd-resolvconf-git openvpn-update-resolv-conf-git \
 
 echo "🔁 Updating hyprpm..."
