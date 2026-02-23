@@ -28,10 +28,14 @@ sudo pacman -S --needed --noconfirm \
   bat gping steam ntfs-3g \
   clapper gst-libav gst-plugins-base \
   gst-plugins-good gst-plugins-bad \
-  gst-plugins-ugly
+  gst-plugins-ugly \ 
+  networkmanager network-manager-applet 
 
 echo "🐚 Setting default shell to fish..."
 chsh -s "$(which fish)"
+
+echo "🌐 Starting networkmanager service..."
+sudo systemctl enable --now NetworkManager
 
 echo "📦 Installing AUR packages via yay..."
 yay -S --needed --noconfirm \
