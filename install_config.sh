@@ -39,7 +39,7 @@ sudo systemctl enable --now NetworkManager
 
 echo "📦 Installing AUR packages via yay..."
 yay -S --needed --noconfirm \
-  happ-desktop-bin google-chrome openvpn-update-systemd-resolved \
+  happ-desktop-bin openvpn-update-systemd-resolved \
   systemd-resolvconf-git openvpn-update-resolv-conf-git \
 
 echo "🔁 Updating hyprpm..."
@@ -67,6 +67,7 @@ mkdir -p ~/.config/tmux/plugins/catppuccin
 git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux --depth 1
 
 echo "🧠 Downloading tmux config..."
+cd ~
 git clone https://github.com/the-simen/tmux-config.git --depth 1
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 rm -f ~/.tmux.conf
