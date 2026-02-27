@@ -69,6 +69,7 @@ git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugin
 echo "🧠 Downloading tmux config..."
 git clone https://github.com/the-simen/tmux-config.git --depth 1
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+rm -f ~/.tmux.conf
 rsync -av --exclude='.git' tmux-config/ ~/
 
 echo "📝 Installing NvChad..."
