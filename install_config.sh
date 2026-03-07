@@ -31,7 +31,7 @@ sudo pacman -S --needed --noconfirm \
   gst-plugins-ugly \
   networkmanager network-manager-applet \
   networkmanager-openvpn \
-  7zip file-roller
+  7zip file-roller ghostty
 
 echo "🐚 Setting default shell to fish..."
 chsh -s "$(which fish)"
