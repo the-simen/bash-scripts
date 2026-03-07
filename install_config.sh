@@ -28,8 +28,9 @@ sudo pacman -S --needed --noconfirm \
   bat gping steam ntfs-3g \
   clapper gst-libav gst-plugins-base \
   gst-plugins-good gst-plugins-bad \
-  gst-plugins-ugly \ 
-  networkmanager network-manager-applet 
+  gst-plugins-ugly \
+  networkmanager network-manager-applet \
+  networkmanager-openvpn
 
 echo "🐚 Setting default shell to fish..."
 chsh -s "$(which fish)"
