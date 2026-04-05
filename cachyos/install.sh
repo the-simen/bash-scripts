@@ -69,6 +69,9 @@ git clone https://github.com/the-simen/cachy-config.git --depth 1
 echo "🧩 Copying config (without deleting others)..."
 rsync --progress -av cachy-config/ ~/.config/
 
+systemctl --user enable ssh-agent
+systemctl --user start ssh-agent
+
 echo "🎨 Installing catppuccin tmux theme..."
 mkdir -p ~/.config/tmux/plugins/catppuccin
 git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux --depth 1

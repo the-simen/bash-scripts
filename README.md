@@ -12,6 +12,7 @@ command to install my cachy configs
 ``` 
 git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ && sudo chmod +x ~/bash-scripts/cachyos/install.sh && ~/bash-scripts/cachyos/install.sh
 ```
+It will install some apps, my config folder, my tmux config and my NvChad config (neovim distribution)
 
 
 comand to update my cachy configs (.config and neovim)
