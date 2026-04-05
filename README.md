@@ -15,9 +15,9 @@ git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ && sudo chm
 
 
 comand to update my cachy configs (.config and neovim)
-    ```
-    cd ~/bash-scripts && git pull && sudo chmod +x ./cachy/update.sh && ./cachy/update.sh
-    ```
+```
+cd ~/bash-scripts && git pull && sudo chmod +x ./cachy/update.sh && ./cachy/update.sh
+```
 
 ---
 
