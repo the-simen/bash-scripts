@@ -20,9 +20,6 @@ else
   git pull --ff-only || exit 1
 fi
 rm -f ~/.tmux.conf
-rsync -av --exclude='.git' ~/tmux-config/ ~/
-
-echo "🔄 Updating hyprpm..."
-hyprpm update || true
+rsync --progress -av --exclude='.git' ~/tmux-config/ ~/
 
 cd ~
