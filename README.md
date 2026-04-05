@@ -35,6 +35,6 @@ git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ && sudo chm
 ```
 
 comand to update my omarchy configs (.config and neovim)
-    ```
-    cd ~/bash-scripts && git pull && sudo chmod +x ./omarchy/update_config.sh && ./omarchy/update_config.sh
-    ```
+```
+cd ~/bash-scripts && git pull && sudo chmod +x ./omarchy/update_config.sh && ./omarchy/update_config.sh
+```
