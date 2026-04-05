@@ -1,9 +1,40 @@
-use this command to install my configs (omarchy required!)
+# Configs installation scripts
+
+---
+
+## Omarchy
+
+> [!WARNING]
+> DEPRECATED
+
+> [!IMPORTANT]
+> omarchy required!
+
+command to install my omarchy configs 
 ``` 
-git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ && sudo chmod +x ~/bash-scripts/install_config.sh && ~/bash-scripts/install_config.sh
+git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ && sudo chmod +x ~/bash-scripts/omarchy/install_config.sh && ~/bash-scripts/omarchy/install_config.sh
 ```
 
-use this comand to update my configs (.config and neovim)
+comand to update my omarchy configs (.config and neovim)
 ```
-cd ~/bash-scripts && git pull && sudo chmod +x update_config.sh && ./update_config.sh
+cd ~/bash-scripts && git pull && sudo chmod +x ./omarchy/update_config.sh && ./omarchy/update_config.sh
 ```
+
+---
+
+## Cachyos
+
+> [!IMPORTANT]
+> cachyos with niri and noctalia-shell required!
+
+command to install my cachy configs 
+``` 
+git clone https://github.com/the-simen/bash-scripts/ ~/bash-scripts/ && sudo chmod +x ~/bash-scripts/cachyos/install.sh && ~/bash-scripts/cachyos/install.sh
+```
+
+
+comand to update my cachy configs (.config and neovim)
+```
+cd ~/bash-scripts && git pull && sudo chmod +x ./cachy/update.sh && ./cachy/update.sh
+```
+
