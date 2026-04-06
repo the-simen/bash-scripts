@@ -50,42 +50,42 @@ if ! command -v paru &> /dev/null; then
   git clone https://aur.archlinux.org/paru.git /tmp/paru
   cd /tmp/paru
   makepkg -si --noconfirm
-  cd ~
+  cd "$HOME"
 fi
 paru -S --needed --noconfirm \
   happ-desktop-bin openvpn-update-systemd-resolved \
   systemd-resolvconf-git openvpn-update-resolv-conf-git \
 
-echo "📁 Backing up existing ~/.config..."
+echo "📁 Backing up existing $HOME/.config..."
 if [ -d "$HOME/.config" ]; then
     mkdir -p "$BACKUP_DIR"
-    cp -r "$HOME/.config"/* "$BACKUP_DIR"/
+    rsync -a "$HOME/.config/" "$BACKUP_DIR/"
     echo "✅ Backup saved to: $BACKUP_DIR"
 fi
 
 echo "⬇️ Cloning cachy-config..."
 git clone https://github.com/the-simen/cachy-config.git --depth 1
 
-echo "🧩 Copying config (without deleting others)..."
-rsync --progress -av cachy-config/ ~/.config/
+echo "🔗 Creating simlinks for applications..."
+ln -sf "$HOME/.config/applications" "$HOME/.local/share/applications"
 
-systemctl --user enable ssh-agent
-systemctl --user start ssh-agent
+echo "🧩 Copying config (without deleting others)..."
+rsync --progress -av cachy-config/ "$HOME/.config/"
+
+systemctl --user enable --now ssh-agent
 
 echo "🎨 Installing catppuccin tmux theme..."
-mkdir -p ~/.config/tmux/plugins/catppuccin
-git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux --depth 1
+mkdir -p "$HOME/.config/tmux/plugins/catppuccin"
+git clone -b v2.1.3 https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/catppuccin/tmux" --depth 1
 
-echo "🧠 Downloading tmux config..."
-cd ~
-git clone https://github.com/the-simen/tmux-config.git --depth 1
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-rm -f ~/.tmux.conf
-rsync --progress -av --exclude='.git' tmux-config/ ~/
+echo "🧠 Installing tmux config..."
+cd "$HOME"
+git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+ln -sf "$HOME/.config/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
 echo "📝 Installing NvChad..."
-rm -rf ~/.config/nvim ~/.local/share/nvim
-git clone https://github.com/the-simen/nvchad-configs ~/.config/nvim --depth 1
+rm -rf "$HOME/.config/nvim" "$HOME/.local/share/nvim"
+git clone https://github.com/the-simen/nvchad-configs "$HOME/.config/nvim" --depth 1
 
 echo ""
 if command -v notify-send &> /dev/null; then
