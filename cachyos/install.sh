@@ -64,7 +64,7 @@ if [ -d "$HOME/.config" ]; then
 fi
 
 echo "⬇️ Cloning cachy-config..."
-git clone https://github.com/the-simen/cachy-config.git --depth 1
+[ ! -d "$HOME/cachy-config" ] && git clone https://github.com/the-simen/cachy-config.git --depth 1
 
 echo "🔗 Creating simlinks for applications..."
 ln -sf "$HOME/.config/applications" "$HOME/.local/share/applications"
@@ -72,15 +72,17 @@ ln -sf "$HOME/.config/applications" "$HOME/.local/share/applications"
 echo "🧩 Copying config (without deleting others)..."
 rsync --progress -av cachy-config/ "$HOME/.config/"
 
-systemctl --user enable --now ssh-agent
+systemctl --user daemon-reload
+systemctl --user enable --now ssh-agent.service
+systemctl --user enable quickshell.service
 
 echo "🎨 Installing catppuccin tmux theme..."
 mkdir -p "$HOME/.config/tmux/plugins/catppuccin"
-git clone -b v2.1.3 https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/catppuccin/tmux" --depth 1
+[ ! -d "$HOME/.config/tmux/plugins/catppuccin/tmux" ] && git clone -b v2.1.3 https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/catppuccin/tmux" --depth 1
 
 echo "🧠 Installing tmux config..."
 cd "$HOME"
-git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+[ ! -d "$HOME/.tmux/plugins/tpm" ] && git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 ln -sf "$HOME/.config/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
 echo "📝 Installing NvChad..."
