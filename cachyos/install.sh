@@ -32,7 +32,11 @@ sudo pacman -S --needed --noconfirm \
   gst-plugins-ugly \
   networkmanager network-manager-applet \
   networkmanager-openvpn \
-  7zip file-roller ghostty
+  7zip file-roller ghostty ngw-look \
+  cliphist wl-clippboard evtest
+
+echo "adding input user"
+sudo usermod -a -G input $USER
 
 echo "🐚 Setting default shell to fish..."
 if command -v fish &> /dev/null; then
@@ -52,9 +56,8 @@ if ! command -v paru &> /dev/null; then
   makepkg -si --noconfirm
   cd "$HOME"
 fi
-paru -S --needed --noconfirm \
-  happ-desktop-bin openvpn-update-systemd-resolved \
-  systemd-resolvconf-git openvpn-update-resolv-conf-git \
+paru -S --needed \
+  happ-desktop-bin
 
 echo "📁 Backing up existing $HOME/.config..."
 if [ -d "$HOME/.config" ]; then
@@ -75,6 +78,7 @@ rsync --progress -av cachy-config/ "$HOME/.config/"
 systemctl --user daemon-reload
 systemctl --user enable --now ssh-agent.service
 systemctl --user enable quickshell.service
+systemctl --user enable --now cliphist.service
 
 echo "🎨 Installing catppuccin tmux theme..."
 mkdir -p "$HOME/.config/tmux/plugins/catppuccin"
