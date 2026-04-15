@@ -33,7 +33,8 @@ sudo pacman -S --needed --noconfirm \
   networkmanager network-manager-applet \
   networkmanager-openvpn \
   7zip file-roller ghostty ngw-look \
-  cliphist wl-clippboard evtest
+  cliphist wl-clippboard evtest \
+  mpv celluloid
 
 echo "adding input user"
 sudo usermod -a -G input $USER
