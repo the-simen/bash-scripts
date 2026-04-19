@@ -63,7 +63,7 @@ if ! command -v paru &> /dev/null; then
 fi
 paru -S --needed \
   happ-desktop-bin openvpn-update-systemd-resolved \
-  gifski
+  gifski spotify
 
 echo "📁 Backing up existing $HOME/.config..."
 if [ -d "$HOME/.config" ]; then
