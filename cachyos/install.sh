@@ -34,7 +34,11 @@ sudo pacman -S --needed --noconfirm \
   networkmanager-openvpn \
   7zip file-roller ghostty ngw-look \
   cliphist wl-clippboard evtest \
-  mpv celluloid
+  mpv celluloid grim slurp wl-clipboard \
+  tesseract tesseract-data-eng imagemagick \
+  zbar curl translate-shell ffmpeg \
+  jq wf-recorder loupe tree-sitter \
+  tree-sitter-cli
 
 echo "adding input user"
 sudo usermod -a -G input $USER
@@ -58,7 +62,8 @@ if ! command -v paru &> /dev/null; then
   cd "$HOME"
 fi
 paru -S --needed \
-  happ-desktop-bin
+  happ-desktop-bin openvpn-update-systemd-resolved \
+  gifski
 
 echo "📁 Backing up existing $HOME/.config..."
 if [ -d "$HOME/.config" ]; then
