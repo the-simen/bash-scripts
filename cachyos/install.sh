@@ -38,7 +38,7 @@ sudo pacman -S --needed --noconfirm \
   tesseract tesseract-data-eng imagemagick \
   zbar curl translate-shell ffmpeg \
   jq wf-recorder loupe tree-sitter \
-  tree-sitter-cli
+  tree-sitter-cli gnome-calculator
 
 echo "adding input user"
 sudo usermod -a -G input $USER
