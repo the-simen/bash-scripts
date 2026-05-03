@@ -83,7 +83,6 @@ rsync --progress -av cachy-config/ "$HOME/.config/"
 
 systemctl --user daemon-reload
 systemctl --user enable --now ssh-agent.service
-systemctl --user enable quickshell.service
 systemctl --user enable --now cliphist.service
 
 echo "🎨 Installing catppuccin tmux theme..."
