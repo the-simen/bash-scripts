@@ -29,7 +29,7 @@ sudo pacman -S --needed --noconfirm \
   bat gping steam ntfs-3g \
   clapper gst-libav gst-plugins-base \
   gst-plugins-good gst-plugins-bad \
-  gst-plugins-ugly \
+  gst-plugins-ugly gum \
   networkmanager network-manager-applet \
   networkmanager-openvpn \
   7zip file-roller ghostty ngw-look \
