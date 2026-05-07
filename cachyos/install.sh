@@ -24,7 +24,7 @@ echo "📦 Installing core packages..."
 sudo pacman -S --needed --noconfirm \
   cpio cmake meson nodejs npm neovim \
   discord telegram-desktop fish tmux \
-  openvpn yazi fastfetch \
+  openvpn yazi fastfetch fisher \
   openrgb rsync lazygit eza mc btop \
   bat gping steam ntfs-3g \
   clapper gst-libav gst-plugins-base \
@@ -102,3 +102,5 @@ echo ""
 if command -v notify-send &> /dev/null; then
     notify-send "✅ Done!" "📦 Your old configs were backed up to: $BACKUP_DIR 🔁 Please reboot your system!"
 fi
+
+fisher install IlanCosman/tide@v6
