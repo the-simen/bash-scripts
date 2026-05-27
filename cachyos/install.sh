@@ -39,7 +39,8 @@ sudo pacman -S --needed --noconfirm \
   zbar curl translate-shell ffmpeg \
   jq wf-recorder loupe tree-sitter \
   tree-sitter-cli gnome-calculator \
-  wlsunset sound-theme-freedesktop
+  wlsunset sound-theme-freedesktop \
+  decibels
 
 echo "adding input user"
 sudo usermod -a -G input $USER
