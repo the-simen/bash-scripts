@@ -40,7 +40,7 @@ sudo pacman -S --needed --noconfirm \
   jq wf-recorder loupe tree-sitter \
   tree-sitter-cli gnome-calculator \
   wlsunset sound-theme-freedesktop \
-  decibels
+  decibels easyeffects evince pamac-aur
 
 echo "adding input user"
 sudo usermod -a -G input $USER
@@ -77,6 +77,8 @@ fi
 echo "⬇️ Cloning cachy-config..."
 [ ! -d "$HOME/cachy-config" ] && git clone https://github.com/the-simen/cachy-config.git --depth 1
 
+$HOME/.config/scripts/skip_dc_update.sh
+
 echo "🔗 Creating simlinks for applications..."
 ln -sf "$HOME/.config/applications" "$HOME/.local/share/applications"
 
@@ -86,10 +88,6 @@ rsync --progress -av cachy-config/ "$HOME/.config/"
 systemctl --user daemon-reload
 systemctl --user enable --now ssh-agent.service
 systemctl --user enable --now cliphist.service
-
-echo "🎨 Installing catppuccin tmux theme..."
-mkdir -p "$HOME/.config/tmux/plugins/catppuccin"
-[ ! -d "$HOME/.config/tmux/plugins/catppuccin/tmux" ] && git clone -b v2.1.3 https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/catppuccin/tmux" --depth 1
 
 echo "🧠 Installing tmux config..."
 cd "$HOME"
