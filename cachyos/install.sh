@@ -12,6 +12,84 @@ while true; do
     kill -0 "$$" || exit
 done 2>/dev/null &
 
+FLATPAK_APPS=(
+  com.spotify.Client
+  us.zoom.Zoom
+  com.github.PintaProject.Pinta
+  io.github.tuxguitar.TuxGuitar
+)
+AUR_PACKAGES=(
+  happ-desktop-bin
+  gifski
+  karing
+)
+PACMAN_PACKAGES=(
+  cpio
+  cmake
+  meson
+  nodejs
+  npm
+  neovim
+  discord
+  telegram-desktop
+  fish
+  tmux
+  openvpn
+  yazi
+  fastfetch
+  fisher
+  openrgb
+  rsync
+  lazygit
+  eza
+  mc
+  btop
+  bat
+  gping
+  steam
+  ntfs-3g
+  clapper
+  gst-libav
+  gst-plugins-base
+  gst-plugins-good
+  gst-plugins-bad
+  gst-plugins-ugly
+  gum
+  networkmanager
+  network-manager-applet
+  networkmanager-openvpn
+  7zip
+  file-roller
+  ghostty
+  ngw-look
+  cliphist
+  wl-clipboard
+  evtest
+  mpv
+  celluloid
+  grim
+  slurp
+  tesseract
+  tesseract-data-eng
+  imagemagick
+  zbar
+  curl
+  translate-shell
+  ffmpeg
+  jq
+  wf-recorder
+  loupe
+  tree-sitter
+  tree-sitter-cli
+  gnome-calculator
+  wlsunset
+  sound-theme-freedesktop
+  decibels
+  easyeffects
+  evince
+  pamac-aur
+  flatpak
+)
 BACKUP_DIR="$HOME/.config_backup_$(date +%Y-%m-%d_%H-%M-%S)"
 
 echo "🔄 Updating Arch..."
@@ -21,26 +99,7 @@ echo "📦 Installing git and base-devel..."
 sudo pacman -S --needed --noconfirm git base-devel
 
 echo "📦 Installing core packages..."
-sudo pacman -S --needed --noconfirm \
-  cpio cmake meson nodejs npm neovim \
-  discord telegram-desktop fish tmux \
-  openvpn yazi fastfetch fisher \
-  openrgb rsync lazygit eza mc btop \
-  bat gping steam ntfs-3g \
-  clapper gst-libav gst-plugins-base \
-  gst-plugins-good gst-plugins-bad \
-  gst-plugins-ugly gum \
-  networkmanager network-manager-applet \
-  networkmanager-openvpn \
-  7zip file-roller ghostty ngw-look \
-  cliphist wl-clippboard evtest \
-  mpv celluloid grim slurp wl-clipboard \
-  tesseract tesseract-data-eng imagemagick \
-  zbar curl translate-shell ffmpeg \
-  jq wf-recorder loupe tree-sitter \
-  tree-sitter-cli gnome-calculator \
-  wlsunset sound-theme-freedesktop \
-  decibels easyeffects evince pamac-aur
+sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}"
 
 echo "adding input user"
 sudo usermod -a -G input $USER
@@ -55,6 +114,13 @@ fi
 echo "🌐 Starting networkmanager service..."
 sudo systemctl enable --now NetworkManager
 
+echo "📦 Adding Flathub..."
+flatpak remote-add --if-not-exists flathub \
+  https://flathub.org/repo/flathub.flatpakrepo
+
+echo "📦 Installing flatpack applications..."
+flatpak install -y flathub "${FLATPAK_APPS[@]}"
+
 echo "📦 Installing AUR packages via paru..."
 if ! command -v paru &> /dev/null; then
   echo "⚠️ paru not found. Installing..."
@@ -63,9 +129,8 @@ if ! command -v paru &> /dev/null; then
   makepkg -si --noconfirm
   cd "$HOME"
 fi
-paru -S --needed \
-  happ-desktop-bin openvpn-update-systemd-resolved \
-  gifski spotify karing
+
+paru -S --needed "${AUR_PACKAGES[@]}"
 
 echo "📁 Backing up existing $HOME/.config..."
 if [ -d "$HOME/.config" ]; then
