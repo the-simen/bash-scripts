@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$SCRIPT_DIR/packages/pacman.sh"
+source "$SCRIPT_DIR/packages/aur.sh"
+source "$SCRIPT_DIR/packages/flatpak.sh"
 
 if ! sudo -v; then
     echo "❌ Sudo authentication failed"
@@ -12,97 +17,19 @@ while true; do
     kill -0 "$$" || exit
 done 2>/dev/null &
 
-FLATPAK_APPS=(
-  com.spotify.Client
-  us.zoom.Zoom
-  com.github.PintaProject.Pinta
-  io.github.tuxguitar.TuxGuitar
-)
-AUR_PACKAGES=(
-  happ-desktop-bin
-  gifski
-  karing
-)
-PACMAN_PACKAGES=(
-  cpio
-  cmake
-  meson
-  nodejs
-  npm
-  neovim
-  discord
-  telegram-desktop
-  fish
-  tmux
-  openvpn
-  yazi
-  fastfetch
-  fisher
-  openrgb
-  rsync
-  lazygit
-  eza
-  mc
-  btop
-  bat
-  gping
-  steam
-  ntfs-3g
-  clapper
-  gst-libav
-  gst-plugins-base
-  gst-plugins-good
-  gst-plugins-bad
-  gst-plugins-ugly
-  gum
-  networkmanager
-  network-manager-applet
-  networkmanager-openvpn
-  7zip
-  file-roller
-  ghostty
-  ngw-look
-  cliphist
-  wl-clipboard
-  evtest
-  mpv
-  celluloid
-  grim
-  slurp
-  tesseract
-  tesseract-data-eng
-  imagemagick
-  zbar
-  curl
-  translate-shell
-  ffmpeg
-  jq
-  wf-recorder
-  loupe
-  tree-sitter
-  tree-sitter-cli
-  gnome-calculator
-  wlsunset
-  sound-theme-freedesktop
-  decibels
-  easyeffects
-  evince
-  pamac-aur
-  flatpak
-)
 BACKUP_DIR="$HOME/.config_backup_$(date +%Y-%m-%d_%H-%M-%S)"
 
 echo "🔄 Updating Arch..."
 sudo pacman -Syu --noconfirm
 
 echo "📦 Installing git and base-devel..."
-sudo pacman -S --needed --noconfirm git base-devel
+sudo pacman -S --needed --noconfirm git base-devel rust
 
 echo "📦 Installing core packages..."
 sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}"
 
 echo "adding input user"
-sudo usermod -a -G input $USER
+sudo usermod -a -G input "$USER"
 
 echo "🐚 Setting default shell to fish..."
 if command -v fish &> /dev/null; then
@@ -124,6 +51,7 @@ flatpak install -y flathub "${FLATPAK_APPS[@]}"
 echo "📦 Installing AUR packages via paru..."
 if ! command -v paru &> /dev/null; then
   echo "⚠️ paru not found. Installing..."
+  rm -rf /tmp/paru
   git clone https://aur.archlinux.org/paru.git /tmp/paru
   cd /tmp/paru
   makepkg -si --noconfirm
@@ -140,23 +68,30 @@ if [ -d "$HOME/.config" ]; then
 fi
 
 echo "⬇️ Cloning cachy-config..."
-[ ! -d "$HOME/cachy-config" ] && git clone https://github.com/the-simen/cachy-config.git --depth 1
-
-$HOME/.config/scripts/skip_dc_update.sh
+if [ ! -d "$HOME/cachy-config" ]; then
+  git clone --depth 1 https://github.com/the-simen/cachy-config.git "$HOME/cachy-config"
+fi
 
 echo "🔗 Creating simlinks for applications..."
-ln -sf "$HOME/.config/applications" "$HOME/.local/share/applications"
+mkdir -p "$HOME/.local/share"
+rm -rf "$HOME/.local/share/applications"
+ln -s "$HOME/.config/applications" "$HOME/.local/share/applications"
 
 echo "🧩 Copying config (without deleting others)..."
-rsync --progress -av cachy-config/ "$HOME/.config/"
+rsync --progress -av "$HOME/cachy-config/" "$HOME/.config/"
 
 systemctl --user daemon-reload
 systemctl --user enable --now ssh-agent.service
 systemctl --user enable --now cliphist.service
 
+echo "📝 Fixing discord update issue..."
+$HOME/.config/scripts/skip_dc_update.sh
+
 echo "🧠 Installing tmux config..."
 cd "$HOME"
-[ ! -d "$HOME/.tmux/plugins/tpm" ] && git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
 ln -sf "$HOME/.config/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
 echo "📝 Installing NvChad..."
@@ -168,4 +103,4 @@ if command -v notify-send &> /dev/null; then
     notify-send "✅ Done!" "📦 Your old configs were backed up to: $BACKUP_DIR 🔁 Please reboot your system!"
 fi
 
-fisher install IlanCosman/tide@v6
+fish -c "fisher install IlanCosman/tide@v6"

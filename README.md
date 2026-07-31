@@ -6,7 +6,7 @@
 ## Cachyos (niri + noctalia-shell)
 
 > [!IMPORTANT]
-> cachyos with niri and noctalia-shell required!
+> cachyos with niri and noctalia required!
 
 command to install my cachy configs 
 ``` 
