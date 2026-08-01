@@ -48,6 +48,10 @@ flatpak remote-add --if-not-exists flathub \
 echo "📦 Installing flatpack applications..."
 flatpak install -y flathub "${FLATPAK_APPS[@]}"
 
+if flatpak info com.spotify.Client &>/dev/null; then
+    flatpak override --user --no-talk-name=org.freedesktop.ScreenSaver com.spotify.Client
+fi
+
 echo "📦 Installing AUR packages via paru..."
 if ! command -v paru &> /dev/null; then
   echo "⚠️ paru not found. Installing..."
