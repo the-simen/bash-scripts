@@ -65,4 +65,5 @@ PACMAN_PACKAGES=(
   pamac-aur
   flatpak
   hyprpicker
+  satty
 )
