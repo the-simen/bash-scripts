@@ -66,4 +66,6 @@ PACMAN_PACKAGES=(
   flatpak
   hyprpicker
   satty
+  udiskie
+  udisks2
 )
