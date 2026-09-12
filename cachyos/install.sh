@@ -28,6 +28,9 @@ sudo pacman -S --needed --noconfirm git base-devel rust
 echo "📦 Installing core packages..."
 sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}"
 
+echo "📦 Installing kitty as default terminal in Nemo..."
+gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
+
 echo "adding input user"
 sudo usermod -a -G input "$USER"
 
