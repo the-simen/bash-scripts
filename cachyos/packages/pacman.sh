@@ -59,6 +59,7 @@ PACMAN_PACKAGES=(
   gnome-calculator
   wlsunset
   sound-theme-freedesktop
+  ocean-sound-theme
   decibels
   easyeffects
   evince
