@@ -69,5 +69,5 @@ PACMAN_PACKAGES=(
   satty
   udiskie
   udisks2
-  nautilus
+  dolphin
 )
