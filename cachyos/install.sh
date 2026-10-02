@@ -76,7 +76,7 @@ fi
 
 echo "⬇️ Cloning cachy-config..."
 if [ ! -d "$HOME/cachy-config" ]; then
-  git clone --depth 1 https://github.com/the-simen/cachy-config.git "$HOME/cachy-config"
+  git clone --depth 1 -b noctaliav5 https://github.com/the-simen/cachy-config.git "$HOME/cachy-config"
 fi
 
 echo "🔗 Creating simlinks for applications..."
