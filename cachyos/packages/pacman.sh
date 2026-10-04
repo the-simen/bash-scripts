@@ -41,7 +41,6 @@ PACMAN_PACKAGES=(
   wl-clipboard
   evtest
   mpv
-  celluloid
   grim
   slurp
   tesseract
