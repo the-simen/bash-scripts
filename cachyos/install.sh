@@ -87,6 +87,8 @@ ln -s "$HOME/.config/applications" "$HOME/.local/share/applications"
 echo "🧩 Copying config (without deleting others)..."
 rsync --progress -av "$HOME/cachy-config/" "$HOME/.config/"
 
+$HOME/.config/scripts/install_noctalia_conf.sh "$HOME/.config/noctalia/config.toml.full"
+
 systemctl --user daemon-reload
 systemctl --user enable --now ssh-agent.service
 systemctl --user enable --now cliphist.service
