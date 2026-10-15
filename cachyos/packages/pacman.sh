@@ -49,6 +49,7 @@ PACMAN_PACKAGES=(
   zbar
   curl
   desktop-file-utils
+  dialog
   translate-shell
   ffmpeg
   jq

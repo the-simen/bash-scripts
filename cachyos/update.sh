@@ -72,13 +72,10 @@ if [ -f "$HOME/.config/scripts/ensure-noctalia-palettes.sh" ]; then
     "$HOME/.config/scripts/ensure-noctalia-palettes.sh" || true
 fi
 
-if [ -f "$HOME/.config/noctalia/config.toml.full" ]; then
-    echo "🌙 Refreshing live Noctalia config..."
-    "$HOME/.config/scripts/install_noctalia_conf.sh" "$HOME/.config/noctalia/config.toml.full" \
-        && echo "ℹ️ Restart the Noctalia shell to apply it." \
-        || echo "⚠️ Noctalia config refresh failed."
-fi
-
+# NOTE: live Noctalia settings (~/.local/state/noctalia/settings.toml) are
+# deliberately NOT touched here. Overwriting them resets the user's current
+# theme and generated assets (e.g. Telegram theme). Apply a repo config
+# explicitly via install_noctalia_conf.sh (it keeps a timestamped backup).
 if [ -L "$HOME/.local/share/applications" ]; then
     update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
 fi
