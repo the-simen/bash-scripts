@@ -17,7 +17,7 @@ It will install some apps, my config folder, my tmux config and my NvChad config
 
 comand to update my cachy configs (.config and neovim)
 ```
-cd ~/bash-scripts && git pull && sudo chmod +x ./cachy/update.sh && ./cachy/update.sh
+cd ~/bash-scripts && git pull && sudo chmod +x ./cachyos/update.sh && ./cachyos/update.sh
 ```
 
 ---

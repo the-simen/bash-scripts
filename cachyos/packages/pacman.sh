@@ -48,6 +48,7 @@ PACMAN_PACKAGES=(
   imagemagick
   zbar
   curl
+  desktop-file-utils
   translate-shell
   ffmpeg
   jq

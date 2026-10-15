@@ -1,5 +1,5 @@
 FLATPAK_APPS=(
-  spotify
-  pinta
-  tuxguitar
+  com.spotify.Client
+  com.github.PintaProject.Pinta
+  ar.com.tuxguitar.TuxGuitar
 )
