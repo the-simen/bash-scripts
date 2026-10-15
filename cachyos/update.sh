@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -uo pipefail
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 update_repo() {
     local dir="$1"
@@ -31,8 +32,39 @@ update_repo() {
     fi
 }
 
+# Pull this repo first so the package lists below are fresh,
+# even if update.sh was run without a manual `git pull`.
+if SCRIPT_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)"; then
+    update_repo "$SCRIPT_ROOT" "bash-scripts"
+fi
+
 update_repo "$HOME/.config" "config"
 update_repo "$HOME/.config/nvim" "nvim"
+
+# Install anything missing from the package lists (no full system upgrade).
+source "$SCRIPT_DIR/packages/pacman.sh"
+source "$SCRIPT_DIR/packages/aur.sh"
+source "$SCRIPT_DIR/packages/flatpak.sh"
+
+echo "📦 Installing missing pacman packages..."
+sudo pacman -S --needed --noconfirm "${PACMAN_PACKAGES[@]}" \
+    || echo "⚠️ pacman install failed."
+
+if command -v paru &> /dev/null; then
+    echo "📦 Installing missing AUR packages..."
+    paru -S --needed --noconfirm "${AUR_PACKAGES[@]}" \
+        || echo "⚠️ AUR install failed."
+else
+    echo "⚠️ paru not found, skipping AUR packages."
+fi
+
+if command -v flatpak &> /dev/null; then
+    echo "📦 Installing missing Flatpak apps..."
+    flatpak install -y flathub "${FLATPAK_APPS[@]}" \
+        || echo "⚠️ Flatpak install failed."
+else
+    echo "⚠️ flatpak not found, skipping Flatpak apps."
+fi
 
 # Re-apply what a plain `git pull` does not refresh on its own.
 if [ -f "$HOME/.config/scripts/ensure-noctalia-palettes.sh" ]; then
