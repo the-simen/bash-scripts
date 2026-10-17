@@ -37,6 +37,8 @@ PACMAN_PACKAGES=(
   7zip
   file-roller
   ghostty
+  kitty
+  vestop-bin
   nwg-look
   cliphist
   wl-clipboard
@@ -66,6 +68,7 @@ PACMAN_PACKAGES=(
   easyeffects
   evince
   pamac-aur
+  shelly
   flatpak
   hyprpicker
   satty
