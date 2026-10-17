@@ -5,6 +5,7 @@ PACMAN_PACKAGES=(
   nodejs
   npm
   neovim
+  noctalia
   discord
   telegram-desktop
   fish
