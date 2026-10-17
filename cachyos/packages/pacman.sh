@@ -71,4 +71,5 @@ PACMAN_PACKAGES=(
   udiskie
   udisks2
   dolphin
+  otf-hasklig-nerd
 )
